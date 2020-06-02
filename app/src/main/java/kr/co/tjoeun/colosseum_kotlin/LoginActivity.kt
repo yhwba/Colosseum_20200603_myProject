@@ -1,8 +1,10 @@
 package kr.co.tjoeun.colosseum_kotlin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_login.*
+import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil
+import org.json.JSONObject
 
 class LoginActivity : BaseActivity() {
 
@@ -19,7 +21,12 @@ class LoginActivity : BaseActivity() {
             val email = emailEdt.text.toString()
             val pw = pwEdt.text.toString()
 
+            ServerUtil.postRequestLogin(mContext, email, pw, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+                    Log.d("로그인응답", json.toString())
+                }
 
+            })
 
         }
 
