@@ -23,11 +23,12 @@ public class ViewTopicActivity extends BaseActivity {
 
     Topic mTopic;
     TopicReplyAdapter mTopicReplyAdapter;
+    int topicId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_view_topic);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_view_topic);
         setupEvents();
         setValues();
     }
@@ -42,7 +43,30 @@ public class ViewTopicActivity extends BaseActivity {
                 ServerUtil.postRequestVote(mContext, mTopic.getSideList().get(0).getId(), new ServerUtil.JsonResponseHandler() {
                     @Override
                     public void onResponse(JSONObject json) {
-                        Log.d("투표응답",json.toString());
+                        Log.d("투표응답", json.toString());
+
+                        try {
+                            int code = json.getInt("code");
+                            if (code == 200) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, "참여해주셔서 감사", Toast.LENGTH_SHORT).show();
+                                        getTopicFromServer();
+                                    }
+                                });
+                            } else {
+                                final String message = json.getString("message");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -56,7 +80,29 @@ public class ViewTopicActivity extends BaseActivity {
                 ServerUtil.postRequestVote(mContext, mTopic.getSideList().get(1).getId(), new ServerUtil.JsonResponseHandler() {
                     @Override
                     public void onResponse(JSONObject json) {
-                        Log.d("투표응답",json.toString());
+                        Log.d("투표응답", json.toString());
+                        try {
+                            int code = json.getInt("code");
+                            if (code == 200) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, "참여해주셔서 감사", Toast.LENGTH_SHORT).show();
+                                        getTopicFromServer();
+                                    }
+                                });
+                            } else {
+                                final String message = json.getString("message");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -67,19 +113,22 @@ public class ViewTopicActivity extends BaseActivity {
     @Override
     public void setValues() {
 
+        int topicId = getIntent().getIntExtra("topic_id", -1);
 
-        
-        int topicId = getIntent().getIntExtra("topic_id",-1);
-        
-        if(topicId ==-1){
+        if (topicId == -1) {
 
             Toast.makeText(this, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+        getTopicFromServer();
+    }
+
+    void getTopicFromServer() {
         ServerUtil.getRequestTopicById(mContext, topicId, new ServerUtil.JsonResponseHandler() {
             @Override
             public void onResponse(JSONObject json) {
-                Log.d("토픽상세정보",json.toString());
+                Log.d("토픽상세정보", json.toString());
 
                 try {
                     JSONObject data = json.getJSONObject("data");
@@ -98,26 +147,20 @@ public class ViewTopicActivity extends BaseActivity {
                 }
             }
         });
-
     }
 
-    void setTopicValuesToUi(){
+    void setTopicValuesToUi() {
         binding.topicTitleTxt.setText(mTopic.getTitle());
         Glide.with(mContext).load(mTopic.getImageUrl()).into(binding.topicImg);
 
         binding.firstSideTitleTxt.setText(mTopic.getSideList().get(0).getTitle());
         binding.secondSideTitleTxt.setText(mTopic.getSideList().get(1).getTitle());
 
-        binding.firstSideVoteCountTxt.setText(String.format("%,d표",mTopic.getSideList().get(0).getVoteCount()));
-        binding.secondSideVoteCountTxt.setText(String.format("%,d표",mTopic.getSideList().get(1).getVoteCount()));
+        binding.firstSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(0).getVoteCount()));
+        binding.secondSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(1).getVoteCount()));
 
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext,R.layout.topic_reply_list_item, mTopic.getReplyList());
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList());
         binding.replyListView.setAdapter(mTopicReplyAdapter);
-
-
-
-
-
 
 
     }
