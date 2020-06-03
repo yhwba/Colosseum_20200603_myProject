@@ -16,6 +16,7 @@ public class TopicSide {
             ts.id = json.getInt("id");
             ts.topicId =json.getInt("topic_id");
             ts.title = json.getString("title");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

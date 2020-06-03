@@ -1,15 +1,20 @@
 package kr.co.tjoeun.colosseum_kotlin.datas;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Topic implements Serializable {
 
     private int id;
     private String title;
     private String imageUrl;
+    private List<TopicSide> sideList = new ArrayList<>();
+
 
     public static Topic getTopicFromJson(JSONObject jsonObject) {
         Topic topic = new Topic();
@@ -18,6 +23,15 @@ public class Topic implements Serializable {
             topic.id = jsonObject.getInt("id");
             topic.title = jsonObject.getString("title");
             topic.imageUrl = jsonObject.getString("img_url");
+
+//            같이 따라오는 진영들을 목록에 추가
+            JSONArray sides = jsonObject.getJSONArray("sides");
+            for ( int i = 0; i <sides.length(); i++){
+                JSONObject side = sides.getJSONObject(i);
+                TopicSide topicSide = TopicSide.getTopicSideFromJson(side);
+                topic.sideList.add(topicSide);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,5 +70,9 @@ public class Topic implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<TopicSide> getSideList() {
+        return sideList;
     }
 }
