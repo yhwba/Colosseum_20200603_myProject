@@ -19,6 +19,12 @@ class LoginActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        autoLoginCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            ContextUtil.setAutoLogin(mContext, isChecked)
+        }
+
+
+
         loginBtn.setOnClickListener {
             val email = emailEdt.text.toString()
             val pw = pwEdt.text.toString()

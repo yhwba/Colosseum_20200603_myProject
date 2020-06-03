@@ -51,7 +51,7 @@ public class ViewTopicActivity extends BaseActivity {
 
                 try {
                     JSONObject data = json.getJSONObject("data");
-                    JSONObject topic = json.getJSONObject("topic");
+                    JSONObject topic = data.getJSONObject("topic");
 
                     mTopic = Topic.getTopicFromJson(topic);
 

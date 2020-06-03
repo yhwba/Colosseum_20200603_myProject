@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import kotlinx.android.synthetic.main.activity_splash.*
+import kr.co.tjoeun.colosseum_kotlin.utils.ContextUtil
 
 class SplashActivity : BaseActivity() {
 
@@ -23,9 +24,14 @@ class SplashActivity : BaseActivity() {
 
         Handler().postDelayed({
 
-            val myIntent = Intent(mContext, LoginActivity::class.java)
-            startActivity(myIntent)
-
+            if(ContextUtil.isAutoLogin(mContext) && ContextUtil.getLoginUserToken(mContext) !=""){
+                val myIntent = Intent(mContext, MainActivity::class.java)
+                startActivity(myIntent)
+            }
+            else{
+                val myIntent = Intent(mContext, LoginActivity::class.java)
+                startActivity(myIntent)
+            }
             finish()
 
         }, 2000)
