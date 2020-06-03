@@ -25,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/app_name" />
+            android:text="@string/app_name"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
@@ -36,12 +37,15 @@
         android:text="이메일" />
 
     <EditText
+
         android:id="@+id/emailEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="로그인 이메일 입력"
-        android:inputType="textEmailAddress" />
+        android:background="@color/colorBackground"
+        android:hint="사용자 이메일"
+        android:inputType="textEmailAddress"
+        android:padding="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,27 +58,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="비밀번호 입력"
-        android:inputType="textPassword" />
+        android:background="@color/colorBackground"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:padding="8dp" />
 
     <CheckBox
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/autoLoginCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="자동로그인" />
 
-    <Button
-        android:id="@+id/loginBtn"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="로그인" />
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorSub"
+            android:text="회원가입"
+            android:textColor="@color/white"
+            android:layout_marginRight="5dp"/>
 
-    <Button
-        android:id="@+id/signUpBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="회원가입" />
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorSub"
+            android:text="로그인"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
 
 </LinearLayout>

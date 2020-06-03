@@ -50,16 +50,6 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         contentTxt.setText(data.getContent());
         writerNickNameTxt.setText(data.getWriter().getNickName());
 
-        sideTxt.setText(data.getSide());
-
-        if (data.getSide().equals("찬성")) {
-            sideTxt.setTextColor(Color.RED);
-            sideTxt.setBackgroundResource(R.drawable.red_border_box);
-        }
-        else {
-            sideTxt.setTextColor(Color.BLUE);
-            sideTxt.setBackgroundResource(R.drawable.blue_border_box);
-        }
 
 //        언제 댓글을 남겼는지 표시. => 의견에 있는 기능 활용
         createdAtTxt.setText(data.getFormattedTimeAgo());

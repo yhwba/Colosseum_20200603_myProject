@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".SplashActivity"
-    android:background="@color/colorMain">
+    android:background="@color/colorBackground">
 
     <ImageView
         android:layout_width="120dp"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@color/colorTextmain"
+        android:textColor="@color/colorPoint"
         android:textSize="25dp"/>
 
 </LinearLayout>
