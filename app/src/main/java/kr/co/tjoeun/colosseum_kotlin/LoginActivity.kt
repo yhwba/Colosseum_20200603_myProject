@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity() {
                     val data = json.getJSONObject("data")
                     val token = data.getString("token")
 
-                    ContextUtil.setUserToken(mContext, token)
+                    ContextUtil.setLoginUserToken(mContext, token)
 
                     val myIntent = Intent(mContext, MainActivity::class.java)
                     startActivity(myIntent)
