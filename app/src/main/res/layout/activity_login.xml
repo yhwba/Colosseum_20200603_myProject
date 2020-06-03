@@ -8,6 +8,27 @@
     android:padding="10dp"
     tools:context=".LoginActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/main_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name" />
+
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,29 +39,30 @@
         android:id="@+id/emailEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="로그인 이메일 입력"
         android:layout_marginTop="5dp"
+        android:hint="로그인 이메일 입력"
         android:inputType="textEmailAddress" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:text="비밀번호" />
 
     <EditText
         android:id="@+id/pwEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="비밀번호 입력"
         android:layout_marginTop="5dp"
+        android:hint="비밀번호 입력"
         android:inputType="textPassword" />
 
     <CheckBox
         android:id="@+id/autoLoginCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="자동로그인"/>
+        android:text="자동로그인" />
+
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
