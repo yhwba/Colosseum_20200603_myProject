@@ -6,6 +6,12 @@
 
     <color name="white">#ffffff</color>
 
+    <color name="colorMain">#FFF7D9</color>
+
+    <color name="colorTextmain">#4F4F4F</color>
+
+    <color name="colorPoint">#260000</color>
+
 
 
 </resources>
