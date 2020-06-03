@@ -203,6 +203,28 @@ public class ViewTopicActivity extends BaseActivity {
         mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),topicSides);
         binding.replyListView.setAdapter(mTopicReplyAdapter);
 
+        int mySideIndex =-1;
+        for (int i = 0 ; i < mTopic.getSideList().size(); i++){
+
+            if (mTopic.getSideList().get(i).getId() == mTopic.getMySideId()){
+                mySideIndex = i;
+            }
+
+        }
+        if (mySideIndex ==-1) {
+            binding.voteToFirstSideBtn.setEnabled(true);
+            binding.voteToSecondSideBtn.setEnabled(true);
+        }
+        else if(mySideIndex == 0){
+            binding.voteToFirstSideBtn.setEnabled(false);
+            binding.voteToSecondSideBtn.setEnabled(true);
+        }
+        else {
+            binding.voteToFirstSideBtn.setEnabled(true);
+            binding.voteToSecondSideBtn.setEnabled(false);
+        }
+
+
 
     }
 }
