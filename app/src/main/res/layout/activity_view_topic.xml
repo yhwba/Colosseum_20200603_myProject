@@ -31,6 +31,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/topicTitleTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="주제 제목자리"
@@ -51,12 +52,14 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/firstSideTitleTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="첫번째 진영"
                             android:textColor="@color/white" />
 
                         <TextView
+                            android:id="@+id/firstSideVoteCountTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10 표"
@@ -80,12 +83,14 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/secondSideTitleTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="두번째 진영"
                             android:textColor="@color/white" />
 
                         <TextView
+                            android:id="@+id/secondSideVoteCountTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="24 표"

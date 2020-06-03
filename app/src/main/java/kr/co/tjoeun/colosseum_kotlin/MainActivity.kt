@@ -1,5 +1,6 @@
 package kr.co.tjoeun.colosseum_kotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +23,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        topicListView.setOnItemClickListener { parent, view, position, id ->
+            val clickedTopic = topicList.get(position)
+
+            val myIntent = Intent(mContext,ViewTopicActivity::class.java)
+            myIntent.putExtra("topic_id",clickedTopic.id)
+            startActivity(myIntent)
+        }
 
     }
 
