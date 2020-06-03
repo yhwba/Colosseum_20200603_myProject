@@ -79,9 +79,15 @@ public class ViewTopicActivity extends BaseActivity {
 
         binding.firstSideTitleTxt.setText(mTopic.getSideList().get(0).getTitle());
         binding.secondSideTitleTxt.setText(mTopic.getSideList().get(1).getTitle());
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext,R.layout.topic_reply_list_item, mTopic.getReplyList());
 
+        binding.firstSideVoteCountTxt.setText(String.format("%,d표",mTopic.getSideList().get(0).getVoteCount()));
+        binding.secondSideVoteCountTxt.setText(String.format("%,d표",mTopic.getSideList().get(1).getVoteCount()));
+
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext,R.layout.topic_reply_list_item, mTopic.getReplyList());
         binding.replyListView.setAdapter(mTopicReplyAdapter);
+
+
+
 
 
 
