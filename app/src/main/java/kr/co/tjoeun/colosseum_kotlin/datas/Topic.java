@@ -33,9 +33,14 @@ public class Topic implements Serializable {
                 topic.sideList.add(topicSide);
             }
 
-//            따라오는 의견 목록을 추가 파싱
+//            따라오는 의견 목록을 추가 파싱=> 있을때도 없을 때도 있기 때문에
             if(!jsonObject.isNull("replies")){
-
+                JSONArray replies = jsonObject.getJSONArray("replies");
+                for (int i = 0 ; i < replies.length(); i++){
+                    JSONObject reply = replies.getJSONObject(i);
+                    TopicReply tr = TopicReply.getTopicReplyFromJson(reply);
+                    topic.replyList.add(tr);
+                }
             }
 
         } catch (JSONException e) {
