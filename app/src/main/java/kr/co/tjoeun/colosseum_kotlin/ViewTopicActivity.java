@@ -76,5 +76,7 @@ public class ViewTopicActivity extends BaseActivity {
         binding.firstSideTitleTxt.setText(mTopic.getSideList().get(0).getTitle());
         binding.secondSideTitleTxt.setText(mTopic.getSideList().get(1).getTitle());
 
+
+
     }
 }
