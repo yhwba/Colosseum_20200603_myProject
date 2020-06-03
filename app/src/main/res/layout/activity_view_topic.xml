@@ -15,9 +15,9 @@
 
             <ImageView
                 android:id="@+id/topicImg"
-                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
 
             <View
                 android:layout_width="match_parent"
@@ -66,6 +66,13 @@
                             android:text="10 표"
                             android:textColor="@color/white" />
 
+                        <Button
+                            android:id="@+id/voteToFirstSideBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="투표하기" />
+
                     </LinearLayout>
 
 
@@ -97,6 +104,13 @@
                             android:text="24 표"
                             android:textColor="@color/white" />
 
+                        <Button
+                            android:id="@+id/voteToSecondSideBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="투표하기" />
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -111,15 +125,16 @@
             <ListView
                 android:id="@+id/replyListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
+
             <Button
                 android:id="@+id/replyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
-                android:layout_marginBottom="15dp"
                 android:layout_marginRight="15dp"
-                android:text="의견남기기"/>
+                android:layout_marginBottom="15dp"
+                android:text="의견남기기" />
         </FrameLayout>
     </LinearLayout>
 </layout>
