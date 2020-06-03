@@ -3,6 +3,7 @@ package kr.co.tjoeun.colosseum_kotlin;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 public class ViewTopicActivity extends BaseActivity {
+
     ActivityViewTopicBinding binding;
 
     Topic mTopic;
@@ -36,6 +38,17 @@ public class ViewTopicActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+
+
+        binding.replyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext,EditReplyActivity.class);
+                myIntent.putExtra("topicTitle",mTopic.getTitle());
+                        startActivity(myIntent);
+
+            }
+        });
 
         binding.voteToFirstSideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +127,7 @@ public class ViewTopicActivity extends BaseActivity {
     @Override
     public void setValues() {
 
-        int topicId = getIntent().getIntExtra("topic_id", -1);
+        topicId = getIntent().getIntExtra("topic_id", -1);
 
         if (topicId == -1) {
 

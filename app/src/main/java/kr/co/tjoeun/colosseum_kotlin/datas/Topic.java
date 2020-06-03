@@ -15,6 +15,7 @@ public class Topic implements Serializable {
     private String imageUrl;
     private List<TopicSide> sideList = new ArrayList<>();
     private List<TopicReply> replyList = new ArrayList<>();
+    private int mySideId;
 
 
     public static Topic getTopicFromJson(JSONObject jsonObject) {
@@ -24,6 +25,7 @@ public class Topic implements Serializable {
             topic.id = jsonObject.getInt("id");
             topic.title = jsonObject.getString("title");
             topic.imageUrl = jsonObject.getString("img_url");
+            topic.mySideId = jsonObject.getInt("my_side_id");
 
 //            같이 따라오는 진영들을 목록에 추가
             JSONArray sides = jsonObject.getJSONArray("sides");
@@ -91,5 +93,11 @@ public class Topic implements Serializable {
         return replyList;
     }
 
+    public int getMySideId() {
+        return mySideId;
+    }
 
+    public void setMySideId(int mySideId) {
+        this.mySideId = mySideId;
+    }
 }
