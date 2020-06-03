@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicReplyAdapter;
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
+import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 public class ViewTopicActivity extends BaseActivity {
@@ -159,12 +160,12 @@ public class ViewTopicActivity extends BaseActivity {
         binding.firstSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(0).getVoteCount()));
         binding.secondSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(1).getVoteCount()));
 
-        int[] ids = new int[2];
-        for (int i =0; i <ids.length; i++){
-            ids[i]= mTopic.getSideList().get(i).getId();
+        TopicSide[] topicSides = new TopicSide[2];
+        for (int i =0; i <topicSides.length; i++){
+            topicSides[i]= mTopic.getSideList().get(i);
         }
 
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),ids);
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),topicSides);
         binding.replyListView.setAdapter(mTopicReplyAdapter);
 
 

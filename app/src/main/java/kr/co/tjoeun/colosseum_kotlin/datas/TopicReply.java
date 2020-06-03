@@ -15,10 +15,13 @@ public class TopicReply {
     private User writer;
     private Calendar createdAt = Calendar.getInstance(); // 작성 일시 기록
 
+    private int side_id;
+
     public static TopicReply getTopicReplyFromJson(JSONObject jsonObject) {
         TopicReply tr = new TopicReply();
 
         try {
+            tr.side_id = jsonObject.getInt("side_id");
             tr.id = jsonObject.getInt("id");
             tr.content = jsonObject.getString("content");
 
@@ -56,6 +59,18 @@ public class TopicReply {
         }
 
         return tr;
+    }
+
+    public void setCreatedAt(Calendar createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getSide_id() {
+        return side_id;
+    }
+
+    public void setSide_id(int side_id) {
+        this.side_id = side_id;
     }
 
     public TopicReply() {
