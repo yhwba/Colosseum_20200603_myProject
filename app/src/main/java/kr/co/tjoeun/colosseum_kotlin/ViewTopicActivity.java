@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import kr.co.tjoeun.colosseum_kotlin.adapters.TopicReplyAdapter;
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
@@ -20,6 +21,7 @@ public class ViewTopicActivity extends BaseActivity {
     ActivityViewTopicBinding binding;
 
     Topic mTopic;
+    TopicReplyAdapter mTopicReplyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class ViewTopicActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+
+
         
         int topicId = getIntent().getIntExtra("topic_id",-1);
         
@@ -75,6 +79,10 @@ public class ViewTopicActivity extends BaseActivity {
 
         binding.firstSideTitleTxt.setText(mTopic.getSideList().get(0).getTitle());
         binding.secondSideTitleTxt.setText(mTopic.getSideList().get(1).getTitle());
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext,R.layout.topic_reply_list_item, mTopic.getReplyList());
+
+        binding.replyListView.setAdapter(mTopicReplyAdapter);
+
 
 
 
