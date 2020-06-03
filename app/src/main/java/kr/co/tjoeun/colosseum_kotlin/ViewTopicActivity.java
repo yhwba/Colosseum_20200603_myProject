@@ -43,9 +43,25 @@ public class ViewTopicActivity extends BaseActivity {
         binding.replyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(mContext,EditReplyActivity.class);
-                myIntent.putExtra("topicTitle",mTopic.getTitle());
-                        startActivity(myIntent);
+
+                if( mTopic.getMySideId()==-1){
+                    Toast.makeText(mContext, "진영을 선택해야 의견을 등록 가능합니다.", Toast.LENGTH_SHORT).show();
+                }
+//                내가 선택한 진영의 제목확인
+                else{
+                    String mySideTitle = null;
+                    for (TopicSide ts:mTopic.getSideList()){
+                        if (ts.getId() == mTopic.getMySideId()){
+                            mySideTitle = ts.getTitle();
+                        }
+                    }
+                    Intent myIntent = new Intent(mContext,EditReplyActivity.class);
+                    myIntent.putExtra("topicTitle",mTopic.getTitle());
+                    myIntent.putExtra("sideTitle",mySideTitle);
+                    myIntent.putExtra("topicId",mTopic.getId());
+                    startActivity(myIntent);
+                }
+
 
             }
         });
