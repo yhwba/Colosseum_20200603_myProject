@@ -29,16 +29,16 @@ public class Topic implements Serializable {
 
 //            같이 따라오는 진영들을 목록에 추가
             JSONArray sides = jsonObject.getJSONArray("sides");
-            for ( int i = 0; i <sides.length(); i++){
+            for (int i = 0; i < sides.length(); i++) {
                 JSONObject side = sides.getJSONObject(i);
                 TopicSide topicSide = TopicSide.getTopicSideFromJson(side);
                 topic.sideList.add(topicSide);
             }
 
 //            따라오는 의견 목록을 추가 파싱=> 있을때도 없을 때도 있기 때문에
-            if(!jsonObject.isNull("replies")){
+            if (!jsonObject.isNull("replies")) {
                 JSONArray replies = jsonObject.getJSONArray("replies");
-                for (int i = 0 ; i < replies.length(); i++){
+                for (int i = 0; i < replies.length(); i++) {
                     JSONObject reply = replies.getJSONObject(i);
                     TopicReply tr = TopicReply.getTopicReplyFromJson(reply);
                     topic.replyList.add(tr);
@@ -100,4 +100,17 @@ public class Topic implements Serializable {
     public void setMySideId(int mySideId) {
         this.mySideId = mySideId;
     }
+
+    public int getMySideIndex() {
+        int mySideIndex =-1;
+        for (int i = 0 ; i < this.sideList.size(); i++){
+
+            if (this.sideList.get(i).getId() ==this.mySideId){
+                mySideIndex = i;
+            }
+
+        }
+        return  mySideIndex;
+    }
+
 }

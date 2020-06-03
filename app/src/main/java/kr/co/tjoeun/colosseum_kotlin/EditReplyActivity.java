@@ -39,7 +39,7 @@ public class EditReplyActivity extends BaseActivity {
                 ServerUtil.postRequestReply(mContext, topicId, input, new ServerUtil.JsonResponseHandler() {
                     @Override
                     public void onResponse(JSONObject json) {
-                        Log.d("e댓글달기 응답",json.toString());
+                        Log.d("댓글달기 응답",json.toString());
 
                         try {
                             int code = json.getInt("code");
