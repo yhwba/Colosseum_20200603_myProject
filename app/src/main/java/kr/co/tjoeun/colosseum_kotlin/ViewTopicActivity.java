@@ -159,7 +159,12 @@ public class ViewTopicActivity extends BaseActivity {
         binding.firstSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(0).getVoteCount()));
         binding.secondSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(1).getVoteCount()));
 
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList());
+        int[] ids = new int[2];
+        for (int i =0; i <ids.length; i++){
+            ids[i]= mTopic.getSideList().get(i).getId();
+        }
+
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),ids);
         binding.replyListView.setAdapter(mTopicReplyAdapter);
 
 
