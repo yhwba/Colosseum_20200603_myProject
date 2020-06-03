@@ -151,6 +151,12 @@ public class ViewTopicActivity extends BaseActivity {
             finish();
         }
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getTopicFromServer();
     }
 
