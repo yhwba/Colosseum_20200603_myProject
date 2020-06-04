@@ -99,8 +99,11 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
 
 
 //        대댓글 갯수 표시
-
         replyCountBtn.setText(String.format("답글 %,d",data.getReplyCount()));
+
+
+
+
 //        좋아요
         if (data.isMyLike()){
             likeCountBtn.setBackgroundResource(R.drawable.red_border_box);
