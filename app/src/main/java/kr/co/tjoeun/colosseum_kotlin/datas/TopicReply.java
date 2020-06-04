@@ -14,6 +14,10 @@ public class TopicReply {
     private String content;
     private User writer;
     private Calendar createdAt = Calendar.getInstance(); // 작성 일시 기록
+    private int likeCount;
+    private int dislikeCount;
+    private boolean isMyLike;
+    private boolean isMyDislike;
 
     private int side_id;
 
@@ -51,6 +55,14 @@ public class TopicReply {
 
 //            현재 구해낸 시간에 더해준다.
             tr.createdAt.add(Calendar.HOUR_OF_DAY, gmtOffset);
+
+
+//            좋아요 / 싫어요 갯수 + 내 좋아요
+            tr.likeCount = jsonObject.getInt("like_count");
+            tr.dislikeCount = jsonObject.getInt("dislike_count");
+            tr.isMyLike = jsonObject.getBoolean("my_like");
+            tr.isMyDislike = jsonObject.getBoolean("my_dislikeㄷ");
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -143,5 +155,35 @@ public class TopicReply {
 
     }
 
+    public int getLikeCount() {
+        return likeCount;
+    }
 
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getDislikeCount() {
+        return dislikeCount;
+    }
+
+    public void setDislikeCount(int dislikeCount) {
+        this.dislikeCount = dislikeCount;
+    }
+
+    public boolean isMyLike() {
+        return isMyLike;
+    }
+
+    public void setMyLike(boolean myLike) {
+        isMyLike = myLike;
+    }
+
+    public boolean isMyDislike() {
+        return isMyDislike;
+    }
+
+    public void setMyDislike(boolean myDislike) {
+        isMyDislike = myDislike;
+    }
 }
