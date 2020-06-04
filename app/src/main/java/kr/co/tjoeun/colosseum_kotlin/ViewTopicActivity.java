@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicReplyAdapter;
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
+import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
@@ -38,6 +40,19 @@ public class ViewTopicActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+
+        binding.replyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                TopicReply clickedReply = mTopic.getReplyList().get(position);
+
+//                댓글의 작성자자 id는 받을 수 있지만,  id를 알 수가 없다!
+//                clickedReply.getWriter().getId()
+
+
+            }
+        });
 
 
         binding.replyBtn.setOnClickListener(new View.OnClickListener() {
