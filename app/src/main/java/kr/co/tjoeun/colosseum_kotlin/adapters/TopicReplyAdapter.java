@@ -2,6 +2,7 @@ package kr.co.tjoeun.colosseum_kotlin.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import kr.co.tjoeun.colosseum_kotlin.R;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
+import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 
 public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
@@ -55,7 +59,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         Button likeCountBtn = row.findViewById(R.id.likeCountBtn);
         Button dislikeCountBtn = row.findViewById(R.id.dislikeCountBtn);
 
-        TopicReply data = mList.get(position);
+        final TopicReply data = mList.get(position);
 
         contentTxt.setText(data.getContent());
         writerNickNameTxt.setText(data.getWriter().getNickName());
@@ -86,6 +90,19 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
 //        좋아요 / 싫어요 갯수 표시
         likeCountBtn.setText(String.format("좋아요 %,d", data.getLikeCount()));
         dislikeCountBtn.setText(String.format("싫어요 %,d", data.getDislikeCount()));
+
+//        좋아요 버튼 누른 처리
+        likeCountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServerUtil.postRequestReplyLike(mContext, data.getId(), true, new ServerUtil.JsonResponseHandler() {
+                    @Override
+                    public void onResponse(JSONObject json) {
+                        Log.d("좋아요 누름",json.toString());
+                    }
+                });
+            }
+        });
 
         return row;
     }
