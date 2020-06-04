@@ -2,6 +2,8 @@ package kr.co.tjoeun.colosseum_kotlin.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import kr.co.tjoeun.colosseum_kotlin.R;
+import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
@@ -57,7 +60,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
 
 //        좋아요 / 실헝요 관련 뷰 추기ㅏ
         Button replyCountBtn = row.findViewById(R.id.replyCountBtn);
-        Button likeCountBtn = row.findViewById(R.id.likeCountBtn);
+        final Button likeCountBtn = row.findViewById(R.id.likeCountBtn);
         Button dislikeCountBtn = row.findViewById(R.id.dislikeCountBtn);
 
         final TopicReply data = mList.get(position);
@@ -94,7 +97,6 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
 
 //        좋아요
         if (data.isMyLike()){
-
             likeCountBtn.setBackgroundResource(R.drawable.red_border_box);
             likeCountBtn.setTextColor(Color.RED);
         }
@@ -102,15 +104,14 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
             likeCountBtn.setBackgroundResource(R.drawable.gray_border_box);
             likeCountBtn.setTextColor(mContext.getResources().getColor(R.color.gray));
         }
-
 //        싫어요
         if (data.isMyDislike()){
-            likeCountBtn.setBackgroundResource(R.drawable.blue_border_box);
-            likeCountBtn.setTextColor(Color.BLUE);
+            dislikeCountBtn.setBackgroundResource(R.drawable.blue_border_box);
+            dislikeCountBtn.setTextColor(Color.BLUE);
         }
         else{
-            likeCountBtn.setBackgroundResource(R.drawable.gray_border_box);
-            likeCountBtn.setTextColor(mContext.getResources().getColor(R.color.gray));
+            dislikeCountBtn.setBackgroundResource(R.drawable.gray_border_box);
+            dislikeCountBtn.setTextColor(mContext.getResources().getColor(R.color.gray));
         }
 
 //        좋아요 버튼 누른 처리
@@ -123,7 +124,21 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                         Log.d("좋아요 누름",json.toString());
 
                         try {
-                            String message = json.getString("message");
+//                            String message = json.getString("message");
+                            JSONObject dataObj = json.getJSONObject("data");
+                            JSONObject reply = json.getJSONObject("reply");
+
+                            data.setLikeCount(reply.getInt("like_count"));
+                            data.setMyLike(reply.getBoolean("my_like"));
+                            data.setDislikeCount(reply.getInt("dislike_count"));
+                            data.setMyDislike(reply.getBoolean("my_dislike"));
+
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -140,7 +155,26 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                     @Override
                     public void onResponse(JSONObject json) {
                         Log.d("싫어요 누름",json.toString());
+                        try {
+//                            String message = json.getString("message");
+                            JSONObject dataObj = json.getJSONObject("data");
+                            JSONObject reply = json.getJSONObject("reply");
 
+                            data.setLikeCount(reply.getInt("like_count"));
+                            data.setMyLike(reply.getBoolean("my_like"));
+                            data.setDislikeCount(reply.getInt("dislike_count"));
+                            data.setMyDislike(reply.getBoolean("my_dislike"));
+
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 });
