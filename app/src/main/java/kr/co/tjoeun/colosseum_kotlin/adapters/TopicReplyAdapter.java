@@ -92,11 +92,25 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         likeCountBtn.setText(String.format("좋아요 %,d", data.getLikeCount()));
         dislikeCountBtn.setText(String.format("싫어요 %,d", data.getDislikeCount()));
 
-        if (data.isMyDislike()){
+//        좋아요
+        if (data.isMyLike()){
 
+            likeCountBtn.setBackgroundResource(R.drawable.red_border_box);
+            likeCountBtn.setTextColor(Color.RED);
         }
         else{
+            likeCountBtn.setBackgroundResource(R.drawable.gray_border_box);
+            likeCountBtn.setTextColor(mContext.getResources().getColor(R.color.gray));
+        }
 
+//        싫어요
+        if (data.isMyDislike()){
+            likeCountBtn.setBackgroundResource(R.drawable.blue_border_box);
+            likeCountBtn.setTextColor(Color.BLUE);
+        }
+        else{
+            likeCountBtn.setBackgroundResource(R.drawable.gray_border_box);
+            likeCountBtn.setTextColor(mContext.getResources().getColor(R.color.gray));
         }
 
 //        좋아요 버튼 누른 처리
