@@ -108,6 +108,9 @@ public class EditReplyActivity extends BaseActivity {
 
         if( replyId !=-1){
             setTitle("의견 수정하기");
+            binding.postBtn.setText("의견 수정하기");
+
+            binding.contentEdt.setText(getIntent().getStringExtra("content"));
         }
         else {
             setTitle("의견 등록하기");
