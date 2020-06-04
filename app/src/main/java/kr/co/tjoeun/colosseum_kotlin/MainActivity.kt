@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.co.tjoeun.colosseum_kotlin.adapters.OldTopicAdapter
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicAdapter
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic
 import kr.co.tjoeun.colosseum_kotlin.utils.ContextUtil
@@ -15,6 +16,7 @@ class MainActivity : BaseActivity() {
     val topicList = ArrayList<Topic>()
     lateinit var topicAdapter : TopicAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +27,13 @@ class MainActivity : BaseActivity() {
     override fun setupEvents() {
 
         topicListView.setOnItemClickListener { parent, view, position, id ->
+            val clickedTopic = topicList.get(position)
+
+            val myIntent = Intent(mContext,ViewTopicActivity::class.java)
+            myIntent.putExtra("topic_id",clickedTopic.id)
+            startActivity(myIntent)
+        }
+        oldTopicListView.setOnItemClickListener { parent, view, position, id ->
             val clickedTopic = topicList.get(position)
 
             val myIntent = Intent(mContext,ViewTopicActivity::class.java)
@@ -65,6 +74,7 @@ class MainActivity : BaseActivity() {
             }
 
         })
+
 
     }
 

@@ -19,6 +19,10 @@ public class EditReplyActivity extends BaseActivity {
     String mySideTitle;
     int topicId;
 
+//    의견 수정시에는 값이 -1 이 아니게 변경할 예정
+//     -1이면 새로 등록하는 경우.
+    int replyId =-1;
+
     ActivityEditReplyBinding binding;
 
     @Override
@@ -36,38 +40,54 @@ public class EditReplyActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String input = binding.contentEdt.getText().toString();
-                ServerUtil.postRequestReply(mContext, topicId, input, new ServerUtil.JsonResponseHandler() {
-                    @Override
-                    public void onResponse(JSONObject json) {
-                        Log.d("댓글달기 응답",json.toString());
 
-                        try {
-                            int code = json.getInt("code");
+                if(replyId ==-1){
+                    ServerUtil.postRequestReply(mContext, topicId, input, new ServerUtil.JsonResponseHandler() {
+                        @Override
+                        public void onResponse(JSONObject json) {
+                            Log.d("댓글달기 응답",json.toString());
 
-                            if (code == 200){
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(mContext, "의견등록 완료", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
-                                });
+                            try {
+                                int code = json.getInt("code");
+
+                                if (code == 200){
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(mContext, "의견등록 완료", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    });
+                                }
+                                else{
+                                    final String message= json.getString("message");
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                            else{
-                                final String message= json.getString("message");
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                });
+                    });
+                }
+                else {
+//                    댓글을 수정해야하는 경우
+
+                    ServerUtil.putRequestReply(mContext, replyId, input, new ServerUtil.JsonResponseHandler() {
+                        @Override
+                        public void onResponse(JSONObject json) {
+                            Log.d("수정",json.toString());
+
+                        }
+                    });
+
+                }
+
             }
         });
     }
@@ -82,5 +102,6 @@ public class EditReplyActivity extends BaseActivity {
         binding.sideTitleTxt.setText(mySideTitle);
 
         topicId =getIntent().getIntExtra("topicId",-1);
+
     }
 }
