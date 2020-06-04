@@ -45,7 +45,7 @@ public class ViewReplyActivity extends BaseActivity {
         if (replyId != -1) {
 //            서버에서 의견의 상세정보를 불러오자
             getReplyDataFromServer();
-        }ㄷ
+        }
 
     }
 
