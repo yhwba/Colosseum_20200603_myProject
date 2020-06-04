@@ -1,5 +1,6 @@
 package kr.co.tjoeun.colosseum_kotlin;
 
+import android.app.ApplicationErrorReport;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicReplyAdapter;
+import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewOldTopicBinding;
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
@@ -21,7 +23,7 @@ import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 public class ViewOldTopicActivity extends BaseActivity {
 
-    ActivityViewTopicBinding binding;
+    ActivityViewOldTopicBinding binding;
 
     Topic mTopic;
     TopicReplyAdapter mTopicReplyAdapter;
@@ -44,7 +46,7 @@ public class ViewOldTopicActivity extends BaseActivity {
     @Override
     public void setValues() {
 
-        topicId = getIntent().getIntExtra("topic_id", -1);
+        oldTopicId = getIntent().getIntExtra("topic_id", -1);
 
         if (topicId == -1) {
 
@@ -58,10 +60,10 @@ public class ViewOldTopicActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getTopicFromServer();
+        getOldTopicFromServer();
     }
 
-    void getTopicFromServer() {
+    void getOldTopicFromServer() {
         ServerUtil.getRequestTopicById(mContext, topicId, new ServerUtil.JsonResponseHandler() {
             @Override
             public void onResponse(JSONObject json) {
@@ -87,8 +89,9 @@ public class ViewOldTopicActivity extends BaseActivity {
     }
 
     void setTopicValuesToUi() {
-        binding.topicTitleTxt.setText(mTopic.getTitle());
-        Glide.with(mContext).load(mTopic.getImageUrl()).into(binding.topicImg);
+
+        binding.oldTopicTitleTxt.setText(mTopic.getTitle());
+        Glide.with(mContext).load(mTopic.getImageUrl()).into(binding.oldTopicImg);
 
         binding.firstSideTitleTxt.setText(mTopic.getSideList().get(0).getTitle());
         binding.secondSideTitleTxt.setText(mTopic.getSideList().get(1).getTitle());
@@ -103,21 +106,21 @@ public class ViewOldTopicActivity extends BaseActivity {
 
         mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),topicSides);
         binding.replyListView.setAdapter(mTopicReplyAdapter);
-
-        int mySideIndex = mTopic.getMySideIndex();
-
-        if (mySideIndex ==-1) {
-            binding.voteToFirstSideBtn.setEnabled(true);
-            binding.voteToSecondSideBtn.setEnabled(true);
-        }
-        else if(mySideIndex == 0){
-            binding.voteToFirstSideBtn.setEnabled(false);
-            binding.voteToSecondSideBtn.setEnabled(true);
-        }
-        else {
-            binding.voteToFirstSideBtn.setEnabled(true);
-            binding.voteToSecondSideBtn.setEnabled(false);
-        }
+//
+//        int mySideIndex = mTopic.getMySideIndex();
+//
+//        if (mySideIndex ==-1) {
+//            binding.voteToFirstSideBtn.setEnabled(true);
+//            binding.voteToSecondSideBtn.setEnabled(true);
+//        }
+//        else if(mySideIndex == 0){
+//            binding.voteToFirstSideBtn.setEnabled(false);
+//            binding.voteToSecondSideBtn.setEnabled(true);
+//        }
+//        else {
+//            binding.voteToFirstSideBtn.setEnabled(true);
+//            binding.voteToSecondSideBtn.setEnabled(false);
+//        }
 
 
 

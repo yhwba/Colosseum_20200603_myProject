@@ -58,7 +58,7 @@ public class ViewReplyActivity extends BaseActivity {
 
                 try {
                     JSONObject data = json.getJSONObject("data");
-                    JSONObject reply = json.getJSONObject("reply");
+                    JSONObject reply = data.getJSONObject("reply");
 
                     mReplyData = TopicReply.getTopicReplyFromJson(reply);
 

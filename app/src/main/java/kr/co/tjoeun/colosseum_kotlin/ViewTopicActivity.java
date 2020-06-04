@@ -1,8 +1,10 @@
 package kr.co.tjoeun.colosseum_kotlin;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,54 @@ public class ViewTopicActivity extends BaseActivity {
     @Override
     public void setupEvents() {
 
+        binding.replyListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final TopicReply tr = mTopic.getReplyList().get(position);
+
+                if (tr.getWriter().getId() == GlobalData.loginUser.getId()) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                    alert.setTitle("의견삭제");
+                    alert.setMessage("정말 이 의견을 삭제하시겠습니까\n 달린 모든 대댓글과 좋아요등이 전부 삭제됩니다.");
+
+                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ServerUtil.deleteRequesReply(mContext, tr.getId(), new ServerUtil.JsonResponseHandler() {
+                                @Override
+                                public void onResponse(JSONObject json) {
+                                    Log.d("의견삭제", json.toString());
+                                    try {
+                                        int code = json.getInt("code");
+                                        if (code == 200) {
+
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(mContext, "의견삭제에 성공했습니다", Toast.LENGTH_SHORT).show();
+                                                    getTopicFromServer();
+                                                }
+                                            });
+                                        }
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+
+                        }
+                    });
+                    alert.setNegativeButton("취소", null);
+                    alert.show();
+                }
+
+
+                return true;
+            }
+        });
         binding.replyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -49,10 +99,10 @@ public class ViewTopicActivity extends BaseActivity {
                 TopicReply clickedReply = mTopic.getReplyList().get(position);
 
 //                댓글의 작성자 id는 받을 수 있고 =>GlobalData에서 id를 알 수가 있다!
-                if (clickedReply.getWriter().getId() == GlobalData.loginUser.getId()){
+                if (clickedReply.getWriter().getId() == GlobalData.loginUser.getId()) {
 
                     String mySideTitle = null;
-                    for (TopicSide ts:mTopic.getSideList()) {
+                    for (TopicSide ts : mTopic.getSideList()) {
                         if (ts.getId() == mTopic.getMySideId()) {
                             mySideTitle = ts.getTitle();
                         }
@@ -61,10 +111,10 @@ public class ViewTopicActivity extends BaseActivity {
 //                    내 댓글이니 수정창으로 이동
                     Intent myIntent = new Intent(mContext, EditReplyActivity.class);
 //                    어느 댓글을 수정할 지 id값 전달
-                    myIntent.putExtra("replyId",clickedReply.getId());
-                    myIntent.putExtra("topicTitle",mTopic.getTitle());
-                    myIntent.putExtra("sideTitle",mySideTitle);
-                    myIntent.putExtra("content",  clickedReply.getContent());
+                    myIntent.putExtra("replyId", clickedReply.getId());
+                    myIntent.putExtra("topicTitle", mTopic.getTitle());
+                    myIntent.putExtra("sideTitle", mySideTitle);
+                    myIntent.putExtra("content", clickedReply.getContent());
                     startActivity(myIntent);
                 }
 
@@ -77,21 +127,21 @@ public class ViewTopicActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if( mTopic.getMySideId()==-1){
+                if (mTopic.getMySideId() == -1) {
                     Toast.makeText(mContext, "진영을 선택해야 의견을 등록 가능합니다.", Toast.LENGTH_SHORT).show();
                 }
 //                내가 선택한 진영의 제목확인
-                else{
+                else {
                     String mySideTitle = null;
-                    for (TopicSide ts:mTopic.getSideList()){
-                        if (ts.getId() == mTopic.getMySideId()){
+                    for (TopicSide ts : mTopic.getSideList()) {
+                        if (ts.getId() == mTopic.getMySideId()) {
                             mySideTitle = ts.getTitle();
                         }
                     }
-                    Intent myIntent = new Intent(mContext,EditReplyActivity.class);
-                    myIntent.putExtra("topicTitle",mTopic.getTitle());
-                    myIntent.putExtra("sideTitle",mySideTitle);
-                    myIntent.putExtra("topicId",mTopic.getId());
+                    Intent myIntent = new Intent(mContext, EditReplyActivity.class);
+                    myIntent.putExtra("topicTitle", mTopic.getTitle());
+                    myIntent.putExtra("sideTitle", mySideTitle);
+                    myIntent.putExtra("topicId", mTopic.getId());
                     startActivity(myIntent);
                 }
 
@@ -229,28 +279,25 @@ public class ViewTopicActivity extends BaseActivity {
         binding.secondSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(1).getVoteCount()));
 
         TopicSide[] topicSides = new TopicSide[2];
-        for (int i =0; i <topicSides.length; i++){
-            topicSides[i]= mTopic.getSideList().get(i);
+        for (int i = 0; i < topicSides.length; i++) {
+            topicSides[i] = mTopic.getSideList().get(i);
         }
 
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),topicSides);
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(), topicSides);
         binding.replyListView.setAdapter(mTopicReplyAdapter);
 
         int mySideIndex = mTopic.getMySideIndex();
 
-        if (mySideIndex ==-1) {
+        if (mySideIndex == -1) {
             binding.voteToFirstSideBtn.setEnabled(true);
             binding.voteToSecondSideBtn.setEnabled(true);
-        }
-        else if(mySideIndex == 0){
+        } else if (mySideIndex == 0) {
             binding.voteToFirstSideBtn.setEnabled(false);
             binding.voteToSecondSideBtn.setEnabled(true);
-        }
-        else {
+        } else {
             binding.voteToFirstSideBtn.setEnabled(true);
             binding.voteToSecondSideBtn.setEnabled(false);
         }
-
 
 
     }

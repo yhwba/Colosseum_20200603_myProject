@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
-import kr.co.tjoeun.colosseum_kotlin.adapters.OldTopicAdapter
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicAdapter
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic
 import kr.co.tjoeun.colosseum_kotlin.utils.ContextUtil

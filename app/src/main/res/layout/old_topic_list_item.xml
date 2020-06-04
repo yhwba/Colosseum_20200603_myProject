@@ -15,7 +15,6 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"/>
 
-
         <TextView
             android:id="@+id/oldTopicTitleTxt"
             android:layout_width="match_parent"
