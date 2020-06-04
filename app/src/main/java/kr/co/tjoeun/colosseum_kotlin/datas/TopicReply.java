@@ -61,7 +61,7 @@ public class TopicReply {
             tr.likeCount = jsonObject.getInt("like_count");
             tr.dislikeCount = jsonObject.getInt("dislike_count");
             tr.isMyLike = jsonObject.getBoolean("my_like");
-            tr.isMyDislike = jsonObject.getBoolean("my_dislikeㄷ");
+            tr.isMyDislike = jsonObject.getBoolean("my_dislike");
 
 
         } catch (JSONException e) {
