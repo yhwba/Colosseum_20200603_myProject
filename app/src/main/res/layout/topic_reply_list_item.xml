@@ -95,7 +95,9 @@
             <Button
                 android:id="@+id/replyCountBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
+                android:background="@drawable/gray_border_box"
                 android:focusable="false"
                 android:text="답글 25개"/>
             <TextView
@@ -117,6 +119,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/gray_border_box"
                 android:textColor="@color/gray"
+                android:focusable="false"
                 android:layout_marginLeft="5dp"
                 android:text="싫어요"/>
 

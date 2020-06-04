@@ -1,6 +1,7 @@
 package kr.co.tjoeun.colosseum_kotlin.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import kr.co.tjoeun.colosseum_kotlin.R;
+import kr.co.tjoeun.colosseum_kotlin.ViewReplyActivity;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
@@ -126,7 +128,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                         try {
 //                            String message = json.getString("message");
                             JSONObject dataObj = json.getJSONObject("data");
-                            JSONObject reply = json.getJSONObject("reply");
+                            JSONObject reply = dataObj.getJSONObject("reply");
 
                             data.setLikeCount(reply.getInt("like_count"));
                             data.setMyLike(reply.getBoolean("my_like"));
@@ -158,7 +160,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                         try {
 //                            String message = json.getString("message");
                             JSONObject dataObj = json.getJSONObject("data");
-                            JSONObject reply = json.getJSONObject("reply");
+                            JSONObject reply = dataObj.getJSONObject("reply");
 
                             data.setLikeCount(reply.getInt("like_count"));
                             data.setMyLike(reply.getBoolean("my_like"));
@@ -181,6 +183,14 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
             }
         });
 
+
+        replyCountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext, ViewReplyActivity.class);
+                mContext.startActivity(myIntent);
+            }
+        });
         return row;
     }
 }
