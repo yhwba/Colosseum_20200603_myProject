@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicReplyAdapter;
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
+import kr.co.tjoeun.colosseum_kotlin.datas.GlobalData;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
@@ -47,8 +48,14 @@ public class ViewTopicActivity extends BaseActivity {
 
                 TopicReply clickedReply = mTopic.getReplyList().get(position);
 
-//                댓글의 작성자자 id는 받을 수 있지만,  id를 알 수가 없다!
-//                clickedReply.getWriter().getId()
+//                댓글의 작성자 id는 받을 수 있고 =>GlobalData에서 id를 알 수가 있다!
+                if (clickedReply.getWriter().getId() == GlobalData.loginUser.getId()){
+//                    내 댓글이니 수정창으로 이동
+                    Intent myIntent = new Intent(mContext, EditReplyActivity.class);
+//                    어느 댓글을 수정할 지 id값 전달
+                    myIntent.putExtra("replyId",clickedReply.getId());
+                    startActivity(myIntent);
+                }
 
 
             }
