@@ -107,6 +107,7 @@
                 android:id="@+id/likeCountBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/red_border_box"
                 android:focusable="false"
                 android:text="좋아요"/>
             <Button

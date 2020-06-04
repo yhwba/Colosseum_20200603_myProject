@@ -92,6 +92,13 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         likeCountBtn.setText(String.format("좋아요 %,d", data.getLikeCount()));
         dislikeCountBtn.setText(String.format("싫어요 %,d", data.getDislikeCount()));
 
+        if (data.isMyDislike()){
+
+        }
+        else{
+
+        }
+
 //        좋아요 버튼 누른 처리
         likeCountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
