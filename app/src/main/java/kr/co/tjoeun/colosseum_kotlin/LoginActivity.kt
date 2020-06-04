@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_login.*
+import kr.co.tjoeun.colosseum_kotlin.datas.GlobalData
+import kr.co.tjoeun.colosseum_kotlin.datas.User
 import kr.co.tjoeun.colosseum_kotlin.utils.ContextUtil
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil
 import org.json.JSONObject
@@ -38,6 +40,11 @@ class LoginActivity : BaseActivity() {
                     val token = data.getString("token")
 
                     ContextUtil.setLoginUserToken(mContext, token)
+
+//                    수동로그인을 할때도 글로벌클래스로 유저 넘겨 받기..
+                    val user = data.getJSONObject("user")
+                    val loginUser = User.getUserFromJson(user)
+                    GlobalData.loginUser = loginUser
 
                     val myIntent = Intent(mContext, MainActivity::class.java)
                     startActivity(myIntent)
