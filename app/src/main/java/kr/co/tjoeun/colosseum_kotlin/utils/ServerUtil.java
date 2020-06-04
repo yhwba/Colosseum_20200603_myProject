@@ -316,6 +316,7 @@ public class ServerUtil {
 
 
     }
+
     public static void getRequestOldInfo(Context context, final JsonResponseHandler handler) {
 
         OkHttpClient client = new OkHttpClient();

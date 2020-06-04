@@ -31,7 +31,7 @@ class OldTopicAdapter(context:Context, resId:Int, list:List<Topic>) : ArrayAdapt
         val row = tempRow!!
 
         val oldTopicImg = row.findViewById<ImageView>(R.id.oldTopicImg)
-        val oldTitleTxt = row.findViewById<TextView>(R.id.oldTopicImg)
+        val oldTitleTxt = row.findViewById<TextView>(R.id.oldTopicTitleTxt)
 
         val data = mList[position]
 
