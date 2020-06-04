@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -99,6 +100,27 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                     @Override
                     public void onResponse(JSONObject json) {
                         Log.d("좋아요 누름",json.toString());
+
+                        try {
+                            String message = json.getString("message");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+
+        dislikeCountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServerUtil.postRequestReplyLike(mContext, data.getId(), false, new ServerUtil.JsonResponseHandler() {
+                    @Override
+                    public void onResponse(JSONObject json) {
+                        Log.d("싫어요 누름",json.toString());
+
+
                     }
                 });
             }
