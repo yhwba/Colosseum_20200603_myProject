@@ -103,7 +103,7 @@ public class EditReplyActivity extends BaseActivity {
 
         topicId =getIntent().getIntExtra("topicId",-1);
 
-//        어느 댓글을 수정할지 id를 받아서 replyId변수에 저장
+//        어느 댓글을 수정할지 id를 받아서 replyId 변수에 저장
         replyId = getIntent().getIntExtra("replyId", -1);
 
         if( replyId !=-1){
