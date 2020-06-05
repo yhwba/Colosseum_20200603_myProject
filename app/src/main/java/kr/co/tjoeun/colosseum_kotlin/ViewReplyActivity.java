@@ -3,6 +3,7 @@ package kr.co.tjoeun.colosseum_kotlin;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -38,10 +39,19 @@ public class ViewReplyActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String input = binding.replyContentEdt.getText().toString();
+
+                if( input.length()<10){
+                    Toast.makeText(mContext, "답글은 최소 10자 이상달아주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 ServerUtil.postRequestReReply(mContext, replyId, input, new ServerUtil.JsonResponseHandler() {
                     @Override
                     public void onResponse(JSONObject json) {
                         Log.d("대댓글응답",json.toString());
+
+                        getReplyDataFromServer();
+
                     }
                 });
             }
@@ -100,6 +110,8 @@ public class ViewReplyActivity extends BaseActivity {
         //         => 대댓글 목록을 뿌릴때 필요한 진영 정보를 어떻게 주느냐?
         reReplyAdapter =  new TopicReReplyAdapter(mContext, R.layout.topic_re_reply_list_item, mReplyData.getReplyList());
         binding.replyListView.setAdapter(reReplyAdapter);
+
+        binding.replyContentEdt.setText("");
 
     }
 }
