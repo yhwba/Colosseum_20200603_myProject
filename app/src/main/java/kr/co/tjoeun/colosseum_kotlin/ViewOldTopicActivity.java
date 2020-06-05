@@ -95,12 +95,8 @@ public class ViewOldTopicActivity extends BaseActivity {
         binding.firstSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(0).getVoteCount()));
         binding.secondSideVoteCountTxt.setText(String.format("%,d표", mTopic.getSideList().get(1).getVoteCount()));
 
-        TopicSide[] topicSides = new TopicSide[2];
-        for (int i =0; i <topicSides.length; i++){
-            topicSides[i]= mTopic.getSideList().get(i);
-        }
 
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(),topicSides);
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList());
         binding.replyListView.setAdapter(mTopicReplyAdapter);
 //
 //        int mySideIndex = mTopic.getMySideIndex();

@@ -283,7 +283,7 @@ public class ViewTopicActivity extends BaseActivity {
             topicSides[i] = mTopic.getSideList().get(i);
         }
 
-        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList(), topicSides);
+        mTopicReplyAdapter = new TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.getReplyList());
         binding.replyListView.setAdapter(mTopicReplyAdapter);
 
         int mySideIndex = mTopic.getMySideIndex();
