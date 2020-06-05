@@ -23,13 +23,11 @@ import java.util.List;
 
 import kr.co.tjoeun.colosseum_kotlin.R;
 import kr.co.tjoeun.colosseum_kotlin.ViewReplyActivity;
-import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
-import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 
-public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
+public class TopicReReplyAdapter extends ArrayAdapter<TopicReply> {
 
 
 
@@ -37,7 +35,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
     List<TopicReply> mList;
     LayoutInflater inf;
 
-    public TopicReplyAdapter(@NonNull Context context, int resource, @NonNull List<TopicReply> objects) {
+    public TopicReReplyAdapter(@NonNull Context context, int resource, @NonNull List<TopicReply> objects) {
         super(context, resource, objects);
         mContext = context;
         mList = objects;
@@ -50,7 +48,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         View row = convertView;
 
         if (row == null) {
-            row = inf.inflate(R.layout.topic_reply_list_item, null);
+            row = inf.inflate(R.layout.topic_re_reply_list_item, null);
         }
 
         Log.d("로그 찍어보기", position+"");
@@ -60,7 +58,6 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         TextView createdAtTxt = row.findViewById(R.id.createdAtTxt);
 
 //        좋아요 / 싫어요 관련 뷰 추가
-        Button replyCountBtn = row.findViewById(R.id.replyCountBtn);
         final Button likeCountBtn = row.findViewById(R.id.likeCountBtn);
         Button dislikeCountBtn = row.findViewById(R.id.dislikeCountBtn);
 
@@ -94,10 +91,6 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
 //        좋아요 / 싫어요 갯수 표시
         likeCountBtn.setText(String.format("좋아요 %,d", data.getLikeCount()));
         dislikeCountBtn.setText(String.format("싫어요 %,d", data.getDislikeCount()));
-
-
-//        대댓글 갯수 표시
-        replyCountBtn.setText(String.format("답글 %,d",data.getReplyCount()));
 
 
 
@@ -188,16 +181,6 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
             }
         });
 
-
-        replyCountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(mContext, ViewReplyActivity.class);
-                myIntent.putExtra("replyId",data.getId());
-//                진영 목록을 넘겨줄 방밥.
-                mContext.startActivity(myIntent);
-            }
-        });
         return row;
     }
 }

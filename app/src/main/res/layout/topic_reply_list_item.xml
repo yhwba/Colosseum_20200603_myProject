@@ -107,7 +107,7 @@
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/likeCountBtn"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/gray_border_box"
                 android:focusable="false"
@@ -115,7 +115,7 @@
                 android:text="좋아요"/>
             <Button
                 android:id="@+id/dislikeCountBtn"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/gray_border_box"
                 android:textColor="@color/gray"

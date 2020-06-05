@@ -1,5 +1,7 @@
 package kr.co.tjoeun.colosseum_kotlin.datas;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,8 +80,10 @@ public class TopicReply {
 
             tr.replyCount = jsonObject.getInt("reply_count");
 
-            if (jsonObject.isNull("replies")){
+            if (!jsonObject.isNull("replies")){
                 JSONArray replies = jsonObject.getJSONArray("replies");
+
+                Log.d("대댓글json", replies.toString());
 
                 for ( int i = 0; i<replies.length(); i++){
                     JSONObject re_reply = replies.getJSONObject(i);
