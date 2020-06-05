@@ -1,7 +1,6 @@
 package kr.co.tjoeun.colosseum_kotlin.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
@@ -22,7 +21,6 @@ import org.json.JSONObject;
 import java.util.List;
 
 import kr.co.tjoeun.colosseum_kotlin.R;
-import kr.co.tjoeun.colosseum_kotlin.ViewReplyActivity;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
