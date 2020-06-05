@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public TextView activityTitleTxt;
     public ImageView notificationImg;
+    public ImageView logoImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setTitle(CharSequence title) {
         super.setTitle(title);
 
+        activityTitleTxt.setVisibility(View.VISIBLE);
+        logoImg.setVisibility(View.GONE);
         activityTitleTxt.setText(title);
 
     }
@@ -50,6 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
             activityTitleTxt = customActionView.findViewById(R.id.activityTitleTxt);
             notificationImg = customActionView.findViewById(R.id.notificationImg);
+            logoImg = customActionView.findViewById(R.id.logoImg);
 
             notificationImg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,8 +62,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                     startActivity(myIntent);
                 }
             });
-//          기본화면 이름을 Collosseum으로 셋팅 (기본값으로 각각 메뉴에서 타이틀 정해주면 그것으로 생김)
-            setTitle("Collosseum");
+////          기본화면 이름을 Collosseum으로 셋팅 (기본값으로 각각 메뉴에서 타이틀 정해주면 그것으로 생김)
+//            setTitle("Collosseum");
 
 
         }

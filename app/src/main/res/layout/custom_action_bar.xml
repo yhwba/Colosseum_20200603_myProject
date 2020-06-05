@@ -27,6 +27,7 @@
             android:textColor="@color/black"/>
 
         <ImageView
+            android:id="@+id/logoImg"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:src="@drawable/disney_logo"/>
