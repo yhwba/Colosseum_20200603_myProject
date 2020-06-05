@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 
-public class Notifitcation {
+public class Notification {
 
     private int id;
     private int receiverUserId;
@@ -21,8 +21,8 @@ public class Notifitcation {
     private int focusObjectId;
     private Calendar createdAt = Calendar.getInstance();
 
-    public static Notifitcation getNotiFromJson(JSONObject json){
-        Notifitcation noti = new Notifitcation();
+    public static Notification getNotiFromJson(JSONObject json){
+        Notification noti = new Notification();
 
         try {
             noti.id = json.getInt("id");

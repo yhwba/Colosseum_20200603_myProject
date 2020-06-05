@@ -23,9 +23,7 @@ import java.util.List;
 
 import kr.co.tjoeun.colosseum_kotlin.R;
 import kr.co.tjoeun.colosseum_kotlin.ViewReplyActivity;
-import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicReply;
-import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 
