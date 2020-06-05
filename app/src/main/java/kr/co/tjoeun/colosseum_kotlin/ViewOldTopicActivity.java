@@ -1,10 +1,7 @@
 package kr.co.tjoeun.colosseum_kotlin;
 
-import android.app.ApplicationErrorReport;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -16,7 +13,6 @@ import org.json.JSONObject;
 
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicReplyAdapter;
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewOldTopicBinding;
-import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.datas.TopicSide;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
@@ -46,7 +42,7 @@ public class ViewOldTopicActivity extends BaseActivity {
     @Override
     public void setValues() {
 
-        oldTopicId = getIntent().getIntExtra("topic_id", -1);
+//        oldTopicId = getIntent().getIntExtra("topic_id", -1);
 
         if (topicId == -1) {
 

@@ -14,6 +14,8 @@ import java.util.TimeZone;
 public class TopicReply {
 
     private int id;
+    private int side_id;
+    private TopicSide selectedSide;
     private String content;
     private User writer;
     private Calendar createdAt = Calendar.getInstance(); // 작성 일시 기록
@@ -23,7 +25,7 @@ public class TopicReply {
     private boolean isMyDislike;
     private int replyCount;
 
-    private int side_id;
+
 
 //    대댓글 목록 저장
     private List<TopicReply> replyList = new ArrayList<>();
@@ -34,6 +36,10 @@ public class TopicReply {
         try {
             tr.side_id = jsonObject.getInt("side_id");
             tr.id = jsonObject.getInt("id");
+
+            JSONObject selected_side = jsonObject.getJSONObject("selected_side");
+            tr.selectedSide = TopicSide.getTopicSideFromJson(selected_side);
+
             tr.content = jsonObject.getString("content");
 
 
@@ -216,5 +222,13 @@ public class TopicReply {
 
     public List<TopicReply> getReplyList() {
         return replyList;
+    }
+
+    public TopicSide getSelectedSide() {
+        return selectedSide;
+    }
+
+    public void setSelectedSide(TopicSide selectedSide) {
+        this.selectedSide = selectedSide;
     }
 }
