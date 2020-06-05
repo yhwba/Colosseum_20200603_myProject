@@ -58,8 +58,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                     startActivity(myIntent);
                 }
             });
-
-
+//          기본화면 이름을 Collosseum으로 셋팅 (기본값으로 각각 메뉴에서 타이틀 정해주면 그것으로 생김)
+            setTitle("Collosseum");
 
 
         }
