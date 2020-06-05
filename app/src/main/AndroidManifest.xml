@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ViewReplyActivity"></activity>
-        <activity android:name=".ViewOldTopicActivity" />
         <activity android:name=".EditReplyActivity" />
         <activity android:name=".ViewTopicActivity" />
         <activity android:name=".MainActivity" />

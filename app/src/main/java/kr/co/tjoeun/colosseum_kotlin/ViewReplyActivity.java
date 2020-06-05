@@ -82,5 +82,6 @@ public class ViewReplyActivity extends BaseActivity {
     void setUiByReplyData(){
         binding.writerNickNameTxt.setText(mReplyData.getWriter().getNickName());
         binding.contentTxt.setText(mReplyData.getContent());
+        binding.sideTitleTxt.setText(mReplyData.getSelectedSide().getTitle());
     }
 }
