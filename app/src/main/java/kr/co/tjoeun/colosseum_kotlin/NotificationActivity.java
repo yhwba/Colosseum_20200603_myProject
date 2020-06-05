@@ -22,6 +22,7 @@ import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 public class NotificationActivity extends BaseActivity {
 
     ActivityNotificationBinding binding;
+
     List<Notification> notificationList = new ArrayList<>();
     NotificationAdapter myNotiAdapter;
 
@@ -44,6 +45,8 @@ public class NotificationActivity extends BaseActivity {
     public void setValues() {
 
         notificationImg.setVisibility(View.INVISIBLE);
+
+
         myNotiAdapter = new NotificationAdapter(mContext, R.layout.notification_list_item, notificationList);
         binding.notificationListView.setAdapter(myNotiAdapter);
     }
