@@ -2,6 +2,7 @@ package kr.co.tjoeun.colosseum_kotlin;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -32,6 +33,18 @@ public class ViewReplyActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+        binding.replyPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = binding.replyContentEdt.getText().toString();
+                ServerUtil.postRequestReReply(mContext, replyId, input, new ServerUtil.JsonResponseHandler() {
+                    @Override
+                    public void onResponse(JSONObject json) {
+                        Log.d("대댓글응답",json.toString());
+                    }
+                });
+            }
+        });
 
     }
 

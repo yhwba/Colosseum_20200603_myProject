@@ -57,7 +57,7 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
         TextView sideTxt = row.findViewById(R.id.sideTxt);
         TextView createdAtTxt = row.findViewById(R.id.createdAtTxt);
 
-//        좋아요 / 실헝요 관련 뷰 추기ㅏ
+//        좋아요 / 싫어요 관련 뷰 추기ㅏ
         Button replyCountBtn = row.findViewById(R.id.replyCountBtn);
         final Button likeCountBtn = row.findViewById(R.id.likeCountBtn);
         Button dislikeCountBtn = row.findViewById(R.id.dislikeCountBtn);
