@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.co.tjoeun.colosseum_kotlin.adapters.OldTopicAdapter
 import kr.co.tjoeun.colosseum_kotlin.adapters.TopicAdapter
+import kr.co.tjoeun.colosseum_kotlin.datas.OldTopic
 import kr.co.tjoeun.colosseum_kotlin.datas.Topic
 import kr.co.tjoeun.colosseum_kotlin.utils.ContextUtil
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil
@@ -14,8 +16,8 @@ class MainActivity : BaseActivity() {
 
     val topicList = ArrayList<Topic>()
     lateinit var topicAdapter : TopicAdapter
-//    val oldTopicList = ArrayList<OldTopic>()
-//    lateinit var oldTopicAdapter : OldTopicAdapter
+    val oldTopicList = ArrayList<OldTopic>()
+    lateinit var oldTopicAdapter : OldTopicAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
